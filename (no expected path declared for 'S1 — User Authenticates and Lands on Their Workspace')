@@ -1,0 +1,10 @@
+# TODO(implementation-agent): implement "S1 — User Authenticates and Lands on Their Workspace"
+# As an internal team member, I want to sign in with my corporate account so that I land in my team's workspace with the correct role.
+#
+# Acceptance criteria to satisfy:
+# - User can click "Sign in" from the marketing/landing page and is redirected through Entra ID OIDC.
+# - On successful sign-in, a `__Host-` auth cookie containing `userId`, `organizationId`, `roles`, and `sessionId` is set on the browser.
+# - First-time internal users land on an empty-state workspace view with a "Create your first board" call to action.
+# - Session is honored across browser tabs and survives a hard refresh; sign-out clears the cookie and redirects to the landing page.
+# - Failed authentication (cancellation, expired token) returns the user to the landing page with a non-blocking error message; no PII is leaked in error text.
+# - Tenant scope is enforced on the very first authenticated request — a user from Org A cannot see any data from Org B even via direct URL.
