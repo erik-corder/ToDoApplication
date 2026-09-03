@@ -1,0 +1,16 @@
+# .NET
+apps/api/bin/
+apps/api/obj/
+*.user
+
+# Node / Next.js
+apps/web/node_modules/
+apps/web/.next/
+apps/web/out/
+apps/web/.env*.local
+
+# OS / editor
+.vs/
+.vscode/
+.idea/
+.DS_Store

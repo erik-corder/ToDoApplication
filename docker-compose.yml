@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todoapp
+    ports:
+      # Host port 5434 — 5432/5433 are commonly already in use by other
+      # local Postgres containers; change freely, it only affects how you
+      # reach Postgres from your host (containers talk to `db:5432`
+      # regardless, per the internal Docker network below).
+      - "5434:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./apps/api
+    environment:
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=todoapp;Username=postgres;Password=postgres"
+      Frontend__Origin: "http://localhost:3002"
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./apps/web
+    environment:
+      NEXT_PUBLIC_API_URL: "http://localhost:8080"
+    ports:
+      # Host port 3002 — 3000/3001 are often already taken by another
+      # local dev server; change freely (the container listens on 3000
+      # internally regardless).
+      - "3002:3000"
+    depends_on:
+      - api
+
+volumes:
+  db_data:
