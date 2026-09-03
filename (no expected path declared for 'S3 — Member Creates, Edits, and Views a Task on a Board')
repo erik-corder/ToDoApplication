@@ -1,0 +1,11 @@
+# TODO(implementation-agent): implement "S3 — Member Creates, Edits, and Views a Task on a Board"
+# As a team member, I want to create, edit, and view tasks on the kanban board so that I can capture work, assign it, and track it through to done.
+#
+# Acceptance criteria to satisfy:
+# - Authenticated user can open a board and see existing tasks across columns rendered in a kanban layout.
+# - User can click "Add task" in any column and create a task with title (required), description, assignee, due date, and priority.
+# - Newly created tasks appear in the chosen column immediately for the creating user.
+# - User can open a task, edit any field, and save; changes are persisted and the updated card reflects the new values.
+# - User can delete a task they created (or any task, if their role permits per HLD).
+# - All operations are tenant-scoped — a member of Org A cannot create or read tasks in Org B even if they guess the IDs.
+# - `RowVersion` concurrency token is updated on every save; conflicting edits surface a clear "this task was updated by someone else" message and prompt a merge/reload.
