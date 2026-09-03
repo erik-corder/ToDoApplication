@@ -1,0 +1,10 @@
+# TODO(implementation-agent): implement "S2 — Owner Creates an Organization, Workspace, and First Board"
+# As the first user in a new internal team, I want to create my organization, workspace, and initial board so that my team has a working kanban ready to use on day one.
+#
+# Acceptance criteria to satisfy:
+# - After sign-in, a user with no membership sees an onboarding screen with "Create your organization" form (name, slug).
+# - Submitting the form creates an `Organization`, auto-creates a default `Workspace`, and grants the creator the `Owner` role.
+# - From the workspace view, the user can create a `Board` with name; board creation auto-creates default columns ("To Do", "In Progress", "Done").
+# - The created board is visible immediately in the workspace sidebar.
+# - Slug uniqueness is enforced; conflicting slugs surface a clear inline validation error.
+# - All created entities carry the correct `OrganizationId` and are persisted to Azure SQL.
